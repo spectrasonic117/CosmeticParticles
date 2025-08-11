@@ -4,7 +4,6 @@ import com.spectrasonic.CosmeticParticles.Main;
 import com.spectrasonic.CosmeticParticles.managers.ParticleManager;
 import com.spectrasonic.Utils.MessageUtils;
 import dev.jorel.commandapi.CommandAPICommand;
-import dev.jorel.commandapi.arguments.LiteralArgument;
 import org.bukkit.entity.Player;
 
 /**
