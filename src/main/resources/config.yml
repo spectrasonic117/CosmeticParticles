@@ -1,0 +1,65 @@
+# Configuration file for CosmeticParticles plugin
+
+# Plugin settings
+plugin:
+  debug: false
+  version: "1.0.0"
+  
+# Particle cosmetic settings
+cosmetics:
+  # Enable/disable the entire cosmetic system
+  enabled: true
+  
+  # Default particle settings
+  default:
+    # Type of particle (ENCHANTMENT_TABLE, FLAME, SPELL_WITCH, etc.)
+    particle-type: "ENCHANTMENT_TABLE"
+    # Number of particles per animation frame
+    particle-count: 3
+    # Orbital radius around the player (in blocks)
+    radius: 1.5
+    # Animation speed (lower = slower, higher = faster)
+    speed: 0.1
+    # Y offset from player's feet (in blocks)
+    y-offset: 0.2
+  
+  # Performance settings
+  performance:
+    # Update interval in ticks (1 = every tick, 2 = every 2 ticks, etc.)
+    update-interval: 1
+    # Maximum number of players that can have cosmetics enabled at once
+    max-active-cosmetics: 50
+    # Cleanup interval for offline players (in ticks)
+    cleanup-interval: 100
+
+# Messages
+messages:
+  # Prefix for all plugin messages
+  prefix: "&7[&6CosmeticParticles&7] &6» "
+  
+  # Command messages
+  commands:
+    enabled: "&a✨ Particle cosmetics enabled! Magical particles are now orbiting around you."
+    disabled: "&e🌟 Particle cosmetics disabled. Your magical aura has faded."
+    already-enabled: "&e You already have particle cosmetics enabled! Use &6/cosmetic disable &efirst."
+    not-enabled: "&c❌ You don't have any active particle cosmetics to disable."
+    failed-enable: "&c❌ Failed to enable particle cosmetics. Please try again."
+    max-limit-reached: "&c❌ Maximum number of active cosmetics reached. Try again later."
+    
+  # Help messages
+  help:
+    header: "&6===== Cosmetic Particles Help ====="
+    available-commands: "&f Available commands:"
+    enable-command: "&e• /cosmetic enable &7- &7Enable magical particle effects"
+    disable-command: "&e• /cosmetic disable &7- &7Disable your particle effects"
+    status-enabled: "&a✨ Status: Particle cosmetics are currently &lENABLED"
+    status-disabled: "&7💫 Status: Particle cosmetics are currently &lDISABLED"
+
+# Debug settings
+debug:
+  # Enable debug logging
+  enabled: false
+  # Log particle updates
+  log-updates: false
+  # Log command usage
+  log-commands: true

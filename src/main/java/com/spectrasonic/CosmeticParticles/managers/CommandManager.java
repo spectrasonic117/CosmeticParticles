@@ -1,12 +1,14 @@
 package com.spectrasonic.CosmeticParticles.managers;
 
 import com.spectrasonic.CosmeticParticles.Main;
+import com.spectrasonic.CosmeticParticles.commands.CosmeticCommand;
 import lombok.Getter;
 
 @Getter
 public class CommandManager {
 
     private final Main plugin;
+    private CosmeticCommand cosmeticCommand;
 
     public CommandManager(Main plugin) {
         this.plugin = plugin;
@@ -14,6 +16,7 @@ public class CommandManager {
     }
 
     private void registerCommands() {
-        // Register commands here
+        // Register the cosmetic command
+        this.cosmeticCommand = new CosmeticCommand(plugin, plugin.getParticleManager());
     }
 }

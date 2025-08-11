@@ -3,3 +3,22 @@ version: '${version}'
 main: com.spectrasonic.CosmeticParticles.Main
 api-version: '1.21'
 authors: [Spectrasonic]
+description: A plugin that adds magical particle cosmetics for players
+
+permissions:
+  cosmeticparticles.*:
+    description: Gives access to all cosmetic particle features
+    default: op
+    children:
+      cosmeticparticles.use: true
+      cosmeticparticles.enable: true
+      cosmeticparticles.disable: true
+  cosmeticparticles.use:
+    description: Allows using the base cosmetic command
+    default: true
+  cosmeticparticles.enable:
+    description: Allows enabling particle cosmetics
+    default: true
+  cosmeticparticles.disable:
+    description: Allows disabling particle cosmetics
+    default: true
