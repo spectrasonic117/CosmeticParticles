@@ -1,0 +1,5 @@
+name: CosmeticParticles
+version: '${version}'
+main: com.spectrasonic.CosmeticParticles.Main
+api-version: '1.21'
+authors: [Spectrasonic]
