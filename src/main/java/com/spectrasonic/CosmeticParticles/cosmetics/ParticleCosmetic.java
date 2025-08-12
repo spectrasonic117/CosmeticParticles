@@ -57,10 +57,10 @@ public class ParticleCosmetic {
     public static ParticleCosmetic createMagicalCosmetic(Player player) {
         return new ParticleCosmetic(
             player,
-            Particle.END_ROD, // Magical particles
-            2, // 2 particles per frame
+            Particle.DUST, // Magical particles
+            3, // 2 particles per frame
             1.5, // 1.5 block radius
-            0.1, // Smooth rotation speed
+            0.2, // Smooth rotation speed
             0.2 // Slightly above feet
         );
     }
