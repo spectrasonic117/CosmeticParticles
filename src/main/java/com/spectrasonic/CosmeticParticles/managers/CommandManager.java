@@ -16,7 +16,6 @@ public class CommandManager {
     }
 
     private void registerCommands() {
-        // Register the cosmetic command
         this.cosmeticCommand = new CosmeticCommand(plugin, plugin.getParticleManager());
     }
 }

@@ -58,7 +58,7 @@ public class ParticleCosmetic {
         return new ParticleCosmetic(
             player,
             Particle.END_ROD, // Magical particles
-            3, // 3 particles per frame
+            2, // 2 particles per frame
             1.5, // 1.5 block radius
             0.1, // Smooth rotation speed
             0.2 // Slightly above feet
@@ -101,9 +101,14 @@ public class ParticleCosmetic {
         
         Location playerLocation = player.getLocation();
         
-        // Calculate multiple particle positions in a circle
-        for (int i = 0; i < particleCount; i++) {
-            double particleAngle = angle + (i * (2 * Math.PI / particleCount));
+        // Orbiting particles (Dust)
+        Particle.DustOptions dustOptions = new Particle.DustOptions(
+            org.bukkit.Color.fromRGB(15, 241, 241), 
+            1.0f
+        );
+        
+        for (int i = 0; i < 2; i++) {
+            double particleAngle = angle + (i * Math.PI); // Two opposite particles
             
             double x = playerLocation.getX() + Math.cos(particleAngle) * radius;
             double y = playerLocation.getY() + yOffset;
@@ -111,16 +116,32 @@ public class ParticleCosmetic {
             
             Location particleLocation = new Location(playerLocation.getWorld(), x, y, z);
             
-            // Spawn the particle for all nearby players
             playerLocation.getWorld().spawnParticle(
-                particleType,
+                Particle.DUST,
                 particleLocation,
-                1, // Count per spawn
-                0.0, // No offset X
-                0.0, // No offset Y  
-                0.0, // No offset Z
-                0.0  // No extra data
+                1,
+                dustOptions
             );
+        }
+        
+        // Burst particles (Soul Fire Flame)
+        if (Math.random() < 0.1) { // 10% chance per tick
+            Location center = player.getLocation().add(0, 1, 0); // Player's center
+            for (int i = 0; i < 5; i++) {
+                double offsetX = (Math.random() - 0.5) * 2;
+                double offsetY = (Math.random() - 0.5) * 2;
+                double offsetZ = (Math.random() - 0.5) * 2;
+                
+                player.getWorld().spawnParticle(
+                    Particle.SOUL_FIRE_FLAME,
+                    center,
+                    0,
+                    offsetX,
+                    offsetY,
+                    offsetZ,
+                    0.1 // Speed
+                );
+            }
         }
         
         // Increment angle for smooth rotation
