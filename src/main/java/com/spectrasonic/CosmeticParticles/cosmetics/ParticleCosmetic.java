@@ -7,10 +7,6 @@ import org.bukkit.scheduler.BukkitTask;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Represents a cosmetic particle effect for a player
- * Handles the orbital particle animation around the player
- */
 @Getter
 @Setter
 public class ParticleCosmetic {
@@ -26,16 +22,6 @@ public class ParticleCosmetic {
     private double angle;
     private boolean active;
     
-    /**
-     * Creates a new particle cosmetic for a player
-     * 
-     * @param player The player to apply the cosmetic to
-     * @param particleType The type of particle to display
-     * @param particleCount Number of particles per animation frame
-     * @param radius Orbital radius around the player
-     * @param speed Animation speed (angle increment per tick)
-     * @param yOffset Y offset from player's feet
-     */
     public ParticleCosmetic(Player player, Particle particleType, int particleCount, 
                            double radius, double speed, double yOffset) {
         this.player = player;
@@ -48,12 +34,7 @@ public class ParticleCosmetic {
         this.active = false;
     }
     
-    /**
-     * Creates a default magical particle cosmetic
-     * 
-     * @param player The player to apply the cosmetic to
-     * @return A new ParticleCosmetic with magical settings
-     */
+
     public static ParticleCosmetic createMagicalCosmetic(Player player) {
         return new ParticleCosmetic(
             player,
@@ -65,9 +46,6 @@ public class ParticleCosmetic {
         );
     }
     
-    /**
-     * Starts the particle animation
-     */
     public void start() {
         if (active || animationTask != null) {
             return;
@@ -78,9 +56,6 @@ public class ParticleCosmetic {
         angle = 0.0;
     }
     
-    /**
-     * Stops the particle animation
-     */
     public void stop() {
         active = false;
         if (animationTask != null) {
@@ -89,10 +64,6 @@ public class ParticleCosmetic {
         }
     }
     
-    /**
-     * Updates the particle animation for one frame
-     * This method should be called periodically to animate the particles
-     */
     public void update() {
         if (!active || !player.isOnline()) {
             stop();
@@ -151,12 +122,6 @@ public class ParticleCosmetic {
         }
     }
     
-    /**
-     * Checks if this cosmetic belongs to the specified player
-     * 
-     * @param player The player to check
-     * @return true if this cosmetic belongs to the player
-     */
     public boolean belongsTo(Player player) {
         return this.player.equals(player);
     }

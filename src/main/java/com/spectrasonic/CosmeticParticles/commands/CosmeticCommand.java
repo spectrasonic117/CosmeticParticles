@@ -6,30 +6,17 @@ import com.spectrasonic.Utils.MessageUtils;
 import dev.jorel.commandapi.CommandAPICommand;
 import org.bukkit.entity.Player;
 
-/**
- * Handles the /cosmetic command and its subcommands
- * Provides enable and disable functionality for particle cosmetics
- */
 public class CosmeticCommand {
     
     private final Main plugin;
     private final ParticleManager particleManager;
     
-    /**
-     * Creates a new CosmeticCommand handler
-     * 
-     * @param plugin The main plugin instance
-     * @param particleManager The particle manager instance
-     */
     public CosmeticCommand(Main plugin, ParticleManager particleManager) {
         this.plugin = plugin;
         this.particleManager = particleManager;
         registerCommand();
     }
     
-    /**
-     * Registers the /cosmetic command with all subcommands
-     */
     private void registerCommand() {
         new CommandAPICommand("cosmetic")
             .withPermission("cosmeticparticles.use")
@@ -45,11 +32,6 @@ public class CosmeticCommand {
             .register(plugin);
     }
     
-    /**
-     * Creates the enable subcommand
-     * 
-     * @return The enable subcommand
-     */
     private CommandAPICommand createEnableCommand() {
         return new CommandAPICommand("enable")
             .withPermission("cosmeticparticles.enable")
@@ -62,11 +44,6 @@ public class CosmeticCommand {
             });
     }
     
-    /**
-     * Creates the disable subcommand
-     * 
-     * @return The disable subcommand
-     */
     private CommandAPICommand createDisableCommand() {
         return new CommandAPICommand("disable")
             .withPermission("cosmeticparticles.disable")
@@ -79,12 +56,6 @@ public class CosmeticCommand {
             });
     }
     
-    /**
-     * Handles the enable cosmetic command
-     * 
-     * @param player The player executing the command
-     * @param args Command arguments (unused)
-     */
     private void enableCosmetic(Player player, Object... args) {
         // Check if player already has a cosmetic
         if (particleManager.hasActiveCosmetic(player)) {
@@ -105,12 +76,6 @@ public class CosmeticCommand {
         }
     }
     
-    /**
-     * Handles the disable cosmetic command
-     * 
-     * @param player The player executing the command
-     * @param args Command arguments (unused)
-     */
     private void disableCosmetic(Player player, Object... args) {
         boolean success = particleManager.disableCosmetic(player);
         
@@ -123,12 +88,6 @@ public class CosmeticCommand {
         }
     }
     
-    /**
-     * Shows help information when the base command is used
-     * 
-     * @param player The player executing the command
-     * @param args Command arguments (unused)
-     */
     private void showHelp(Player player, Object... args) {
         MessageUtils.sendMessage(player, "<gold>===== Cosmetic Particles Help =====</gold>");
         MessageUtils.sendMessage(player, "<white>Available commands:</white>");
