@@ -1,7 +1,10 @@
 package com.spectrasonic.CosmeticParticles.managers;
 
 import com.spectrasonic.CosmeticParticles.Main;
+import com.spectrasonic.CosmeticParticles.cosmetics.BaseCosmetic;
+import com.spectrasonic.CosmeticParticles.cosmetics.CosmeticType;
 import com.spectrasonic.CosmeticParticles.cosmetics.ParticleCosmetic;
+import com.spectrasonic.CosmeticParticles.cosmetics.TriadCosmetic;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,7 +22,7 @@ import java.util.UUID;
 public class ParticleManager {
     
     private final Main plugin;
-    private final Map<UUID, ParticleCosmetic> activeCosmetics;
+    private final Map<UUID, BaseCosmetic> activeCosmetics;
     private BukkitTask updateTask;
     private int tickCounter = 0;
     
@@ -42,19 +45,33 @@ public class ParticleManager {
      * @return true if the cosmetic was enabled successfully
      */
     public boolean enableCosmetic(Player player) {
+        return enableCosmetic(player, CosmeticType.HELIX);
+    }
+
+    public boolean enableCosmetic(Player player, CosmeticType cosmeticType) {
         if (player == null || !player.isOnline()) {
             return false;
         }
-        
+
         // Disable existing cosmetic if any
         disableCosmetic(player);
-        
+
         // Create and start new cosmetic
-        ParticleCosmetic cosmetic = ParticleCosmetic.createMagicalCosmetic(player);
+        BaseCosmetic cosmetic = createCosmetic(player, cosmeticType);
+        if (cosmetic == null) {
+            return false;
+        }
+
         cosmetic.start();
-        
         activeCosmetics.put(player.getUniqueId(), cosmetic);
         return true;
+    }
+
+    private BaseCosmetic createCosmetic(Player player, CosmeticType cosmeticType) {
+        return switch (cosmeticType) {
+            case HELIX -> ParticleCosmetic.createMagicalCosmetic(player);
+            case TRIAD -> TriadCosmetic.createTriadCosmetic(player);
+        };
     }
     
     /**
@@ -68,7 +85,7 @@ public class ParticleManager {
             return false;
         }
         
-        ParticleCosmetic cosmetic = activeCosmetics.remove(player.getUniqueId());
+        BaseCosmetic cosmetic = activeCosmetics.remove(player.getUniqueId());
         if (cosmetic != null) {
             cosmetic.stop();
             return true;
@@ -97,7 +114,7 @@ public class ParticleManager {
      * @param player The player to get the cosmetic for
      * @return The player's active cosmetic, or null if none
      */
-    public ParticleCosmetic getCosmetic(Player player) {
+    public BaseCosmetic getCosmetic(Player player) {
         if (player == null) {
             return null;
         }
@@ -110,7 +127,7 @@ public class ParticleManager {
      * Should be called on plugin disable
      */
     public void disableAllCosmetics() {
-        for (ParticleCosmetic cosmetic : activeCosmetics.values()) {
+        for (BaseCosmetic cosmetic : activeCosmetics.values()) {
             cosmetic.stop();
         }
         activeCosmetics.clear();
@@ -127,7 +144,7 @@ public class ParticleManager {
      */
     public void cleanupOfflinePlayers() {
         activeCosmetics.entrySet().removeIf(entry -> {
-            ParticleCosmetic cosmetic = entry.getValue();
+            BaseCosmetic cosmetic = entry.getValue();
             if (!cosmetic.getPlayer().isOnline()) {
                 cosmetic.stop();
                 return true;
@@ -144,7 +161,7 @@ public class ParticleManager {
             @Override
             public void run() {
                 // Update all active cosmetics
-                for (ParticleCosmetic cosmetic : activeCosmetics.values()) {
+                for (BaseCosmetic cosmetic : activeCosmetics.values()) {
                     cosmetic.update();
                 }
                 

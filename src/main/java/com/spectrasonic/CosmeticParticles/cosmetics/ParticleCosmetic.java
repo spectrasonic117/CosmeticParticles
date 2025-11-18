@@ -9,7 +9,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ParticleCosmetic {
+public class ParticleCosmetic implements BaseCosmetic {
+
+    private final CosmeticType type = CosmeticType.HELIX;
     
     private final Player player;
     private final Particle particleType;

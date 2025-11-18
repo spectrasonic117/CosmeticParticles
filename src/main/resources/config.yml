@@ -45,13 +45,17 @@ messages:
     not-enabled: "&c❌ You don't have any active particle cosmetics to disable."
     failed-enable: "&c❌ Failed to enable particle cosmetics. Please try again."
     max-limit-reached: "&c❌ Maximum number of active cosmetics reached. Try again later."
+    helix-enabled: "&a✨ Helix particle cosmetics enabled! Magical particles are now orbiting around you."
+    triad-enabled: "&a🔮 Triad particle cosmetics enabled! Mystical particles are now ascending around you."
     
   # Help messages
   help:
     header: "&6===== Cosmetic Particles Help ====="
     available-commands: "&f Available commands:"
-    enable-command: "&e• /cosmetic enable &7- &7Enable magical particle effects"
+    enable-command: "&e• /cosmetic enable &7- &7Enable default helix particle effects"
     disable-command: "&e• /cosmetic disable &7- &7Disable your particle effects"
+    helix-command: "&e• /cosmetic helix &7- &7Enable magical helix particle effects"
+    triad-command: "&e• /cosmetic triada &7- &7Enable mystical triad particle effects"
     status-enabled: "&a✨ Status: Particle cosmetics are currently &lENABLED"
     status-disabled: "&7💫 Status: Particle cosmetics are currently &lDISABLED"
 
