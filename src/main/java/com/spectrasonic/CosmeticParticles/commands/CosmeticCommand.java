@@ -1,7 +1,6 @@
 package com.spectrasonic.CosmeticParticles.commands;
 
 import com.spectrasonic.CosmeticParticles.Main;
-import com.spectrasonic.CosmeticParticles.commands.subcommands.HelixSubCommand;
 import com.spectrasonic.CosmeticParticles.commands.subcommands.TriadSubCommand;
 import com.spectrasonic.CosmeticParticles.managers.ParticleManager;
 import com.spectrasonic.Utils.MessageUtils;
@@ -12,13 +11,11 @@ public class CosmeticCommand {
 
     private final Main plugin;
     private final ParticleManager particleManager;
-    private final HelixSubCommand helixSubCommand;
     private final TriadSubCommand triadSubCommand;
 
     public CosmeticCommand(Main plugin, ParticleManager particleManager) {
         this.plugin = plugin;
         this.particleManager = particleManager;
-        this.helixSubCommand = new HelixSubCommand(plugin, particleManager);
         this.triadSubCommand = new TriadSubCommand(plugin, particleManager);
         registerCommand();
     }
@@ -26,11 +23,8 @@ public class CosmeticCommand {
     private void registerCommand() {
         new CommandAPICommand("cosmetic")
                 .withPermission("cosmeticparticles.use")
-                .withShortDescription("Manage particle cosmetics")
-                .withFullDescription("Enable or disable particle cosmetic effects")
                 .withSubcommand(createEnableCommand())
                 .withSubcommand(createDisableCommand())
-                .withSubcommand(helixSubCommand.getCommand())
                 .withSubcommand(triadSubCommand.getCommand())
                 .executes((sender, args) -> {
                     if (sender instanceof Player) {
@@ -43,8 +37,6 @@ public class CosmeticCommand {
     private CommandAPICommand createEnableCommand() {
         return new CommandAPICommand("enable")
                 .withPermission("cosmeticparticles.enable")
-                .withShortDescription("Enable particle cosmetics")
-                .withFullDescription("Enables magical particle effects that orbit around you")
                 .executes((sender, args) -> {
                     if (sender instanceof Player) {
                         enableCosmetic((Player) sender, args);

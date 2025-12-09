@@ -9,44 +9,28 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ParticleCosmetic implements BaseCosmetic {
+public class HelixCosmetic implements BaseCosmetic {
 
     private final CosmeticType type = CosmeticType.HELIX;
-    
+
     private final Player player;
-    private final Particle particleType;
-    private final int particleCount;
-    private final double radius;
-    private final double speed;
-    private final double yOffset;
-    
+    private final Particle particleType = Particle.DUST;
+    private final int particleCount = 3;
+    private final double radius = 1.5;
+    private final double speed = 0.2;
+    private final double yOffset = 0.2;
+
     private BukkitTask animationTask;
     private double angle;
     private boolean active;
-    
-    public ParticleCosmetic(Player player, Particle particleType, int particleCount, 
-                           double radius, double speed, double yOffset) {
+
+    public HelixCosmetic(Player player) {
         this.player = player;
-        this.particleType = particleType;
-        this.particleCount = particleCount;
-        this.radius = radius;
-        this.speed = speed;
-        this.yOffset = yOffset;
         this.angle = 0.0;
         this.active = false;
     }
     
 
-    public static ParticleCosmetic createMagicalCosmetic(Player player) {
-        return new ParticleCosmetic(
-            player,
-            Particle.DUST, // Magical particles
-            3, // 2 particles per frame
-            1.5, // 1.5 block radius
-            0.2, // Smooth rotation speed
-            0.2 // Slightly above feet
-        );
-    }
     
     public void start() {
         if (active || animationTask != null) {
