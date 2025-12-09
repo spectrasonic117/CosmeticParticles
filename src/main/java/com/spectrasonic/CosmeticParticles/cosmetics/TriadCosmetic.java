@@ -8,7 +8,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 @RequiredArgsConstructor
-@SuppressWarnings("deprecation")
 public class TriadCosmetic implements BaseCosmetic {
 
     private final CosmeticType type = CosmeticType.TRIAD;
@@ -32,16 +31,12 @@ public class TriadCosmetic implements BaseCosmetic {
         }
         active = true;
         angle = 0.0;
-        animationTask = player.getServer().getScheduler().runTaskTimer(
-                player.getServer().getPluginManager().getPlugin("CosmeticParticles"),
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        update();
-                    }
-                },
-                0L,
-                2L);
+        animationTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                update();
+            }
+        }.runTaskTimer(player.getServer().getPluginManager().getPlugin("CosmeticParticles"), 0L, 2L);
     }
 
     @Override

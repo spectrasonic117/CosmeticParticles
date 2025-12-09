@@ -69,12 +69,23 @@ public class CosmeticCommand {
             return;
         }
 
-        // Enable the cosmetic
-        boolean success = particleManager.enableCosmetic(player);
+        // Get the cosmetic name from arguments
+        String cosmeticName = (String) args[0];
+
+        // Convert to CosmeticType
+        CosmeticType cosmeticType = CosmeticType.fromString(cosmeticName);
+        if (cosmeticType == null) {
+            MessageUtils.sendMessage(player,
+                    "<red>❌ Invalid cosmetic type. Available: helix, triada</red>");
+            return;
+        }
+
+        // Enable the specific cosmetic
+        boolean success = particleManager.enableCosmetic(player, cosmeticType);
 
         if (success) {
             MessageUtils.sendMessage(player,
-                    "<green>✨ Particle cosmetics enabled! Magical particles are now orbiting around you.</green>");
+                    "<green>✨ " + cosmeticType.getName() + " particle cosmetics enabled! Magical particles are now orbiting around you.</green>");
         } else {
             MessageUtils.sendMessage(player,
                     "<red>❌ Failed to enable particle cosmetics. Please try again.</red>");

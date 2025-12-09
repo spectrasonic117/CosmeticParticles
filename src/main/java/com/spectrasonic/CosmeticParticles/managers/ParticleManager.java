@@ -74,12 +74,6 @@ public class ParticleManager {
         };
     }
 
-    /**
-     * Disables the cosmetic for a player
-     * 
-     * @param player The player to disable the cosmetic for
-     * @return true if a cosmetic was disabled, false if no cosmetic was active
-     */
     public boolean disableCosmetic(Player player) {
         if (player == null) {
             return false;
@@ -94,12 +88,6 @@ public class ParticleManager {
         return false;
     }
 
-    /**
-     * Checks if a player has an active cosmetic
-     * 
-     * @param player The player to check
-     * @return true if the player has an active cosmetic
-     */
     public boolean hasActiveCosmetic(Player player) {
         if (player == null) {
             return false;
@@ -108,12 +96,6 @@ public class ParticleManager {
         return activeCosmetics.containsKey(player.getUniqueId());
     }
 
-    /**
-     * Gets the active cosmetic for a player
-     * 
-     * @param player The player to get the cosmetic for
-     * @return The player's active cosmetic, or null if none
-     */
     public BaseCosmetic getCosmetic(Player player) {
         if (player == null) {
             return null;
@@ -122,10 +104,6 @@ public class ParticleManager {
         return activeCosmetics.get(player.getUniqueId());
     }
 
-    /**
-     * Removes all active cosmetics
-     * Should be called on plugin disable
-     */
     public void disableAllCosmetics() {
         for (BaseCosmetic cosmetic : activeCosmetics.values()) {
             cosmetic.stop();
@@ -138,10 +116,6 @@ public class ParticleManager {
         }
     }
 
-    /**
-     * Removes cosmetics for offline players
-     * Called periodically to clean up
-     */
     public void cleanupOfflinePlayers() {
         activeCosmetics.entrySet().removeIf(entry -> {
             BaseCosmetic cosmetic = entry.getValue();
@@ -153,9 +127,6 @@ public class ParticleManager {
         });
     }
 
-    /**
-     * Starts the update task that animates all active cosmetics
-     */
     private void startUpdateTask() {
         updateTask = new BukkitRunnable() {
             @Override
@@ -176,11 +147,6 @@ public class ParticleManager {
         }.runTaskTimer(plugin, 0L, 1L); // Run every tick for smooth animation
     }
 
-    /**
-     * Gets the number of active cosmetics
-     * 
-     * @return The number of players with active cosmetics
-     */
     public int getActiveCosmeticCount() {
         return activeCosmetics.size();
     }
