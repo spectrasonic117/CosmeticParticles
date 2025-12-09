@@ -1,22 +1,22 @@
 package com.spectrasonic.CosmeticParticles.commands;
 
 import com.spectrasonic.CosmeticParticles.Main;
-import com.spectrasonic.CosmeticParticles.commands.subcommands.TriadSubCommand;
+import com.spectrasonic.CosmeticParticles.cosmetics.CosmeticType;
 import com.spectrasonic.CosmeticParticles.managers.ParticleManager;
 import com.spectrasonic.Utils.MessageUtils;
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.ArgumentSuggestions;
+import dev.jorel.commandapi.arguments.StringArgument;
 import org.bukkit.entity.Player;
 
 public class CosmeticCommand {
 
     private final Main plugin;
     private final ParticleManager particleManager;
-    private final TriadSubCommand triadSubCommand;
 
     public CosmeticCommand(Main plugin, ParticleManager particleManager) {
         this.plugin = plugin;
         this.particleManager = particleManager;
-        this.triadSubCommand = new TriadSubCommand(plugin, particleManager);
         registerCommand();
     }
 
@@ -25,7 +25,6 @@ public class CosmeticCommand {
                 .withPermission("cosmeticparticles.use")
                 .withSubcommand(createEnableCommand())
                 .withSubcommand(createDisableCommand())
-                .withSubcommand(triadSubCommand.getCommand())
                 .executes((sender, args) -> {
                     if (sender instanceof Player) {
                         showHelp((Player) sender, args);
@@ -37,9 +36,15 @@ public class CosmeticCommand {
     private CommandAPICommand createEnableCommand() {
         return new CommandAPICommand("enable")
                 .withPermission("cosmeticparticles.enable")
+                .withArguments(new StringArgument("cosmetic")
+                        .replaceSuggestions(ArgumentSuggestions.strings(
+                                CosmeticType.HELIX.getName(),
+                                CosmeticType.TRIAD.getName()
+                        )))
                 .executes((sender, args) -> {
                     if (sender instanceof Player) {
-                        enableCosmetic((Player) sender, args);
+                        String cosmeticName = (String) args.get("cosmetic");
+                        enableCosmetic((Player) sender, cosmeticName);
                     }
                 });
     }
