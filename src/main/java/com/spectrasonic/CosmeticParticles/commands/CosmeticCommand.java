@@ -40,7 +40,8 @@ public class CosmeticCommand {
                         .replaceSuggestions(ArgumentSuggestions.strings(
                                 CosmeticType.HELIX.getName(),
                                 CosmeticType.TRIAD.getName(),
-                                CosmeticType.WAVE_SADDLE.getName()
+                                CosmeticType.WAVE_SADDLE.getName(),
+                                CosmeticType.PULSATING_RING.getName()
                         )))
                 .executes((sender, args) -> {
                     if (sender instanceof Player) {
@@ -77,7 +78,7 @@ public class CosmeticCommand {
         CosmeticType cosmeticType = CosmeticType.fromString(cosmeticName);
         if (cosmeticType == null) {
             MessageUtils.sendMessage(player,
-                    "<red>❌ Invalid cosmetic type. Available: helix, triada, montura</red>");
+                    "<red>❌ Invalid cosmetic type. Available: helix, triada, montura, anillo</red>");
             return;
         }
 
@@ -118,6 +119,8 @@ public class CosmeticCommand {
                 "<yellow>• /cosmetic triada</yellow> - <gray>Enable mystical triad particle effects</gray>");
         MessageUtils.sendMessage(player,
                 "<yellow>• /cosmetic montura</yellow> - <gray>Enable wave saddle particle effects with 3 rotating layers</gray>");
+        MessageUtils.sendMessage(player,
+                "<yellow>• /cosmetic anillo</yellow> - <gray>Enable pulsating ring particle effects</gray>");
         MessageUtils.sendMessage(player, "");
 
         if (particleManager.hasActiveCosmetic(player)) {
