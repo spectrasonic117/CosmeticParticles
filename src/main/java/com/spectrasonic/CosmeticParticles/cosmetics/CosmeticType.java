@@ -2,7 +2,8 @@ package com.spectrasonic.CosmeticParticles.cosmetics;
 
 public enum CosmeticType {
     HELIX("helix", "Efecto de hélice mágico"),
-    TRIAD("triada", "Efecto de triada ascendente");
+    TRIAD("triada", "Efecto de triada ascendente"),
+    WAVE_SADDLE("montura", "Montura ondulada de 3 capas rotatorias");
 
     private final String name;
     private final String description;

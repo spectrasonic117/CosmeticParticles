@@ -5,6 +5,7 @@ import com.spectrasonic.CosmeticParticles.cosmetics.BaseCosmetic;
 import com.spectrasonic.CosmeticParticles.cosmetics.CosmeticType;
 import com.spectrasonic.CosmeticParticles.cosmetics.HelixCosmetic;
 import com.spectrasonic.CosmeticParticles.cosmetics.TriadCosmetic;
+import com.spectrasonic.CosmeticParticles.cosmetics.WaveSaddleCosmetic;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -71,6 +72,7 @@ public class ParticleManager {
         return switch (cosmeticType) {
             case HELIX -> new HelixCosmetic(player);
             case TRIAD -> new TriadCosmetic(player);
+            case WAVE_SADDLE -> new WaveSaddleCosmetic(player);
         };
     }
 
