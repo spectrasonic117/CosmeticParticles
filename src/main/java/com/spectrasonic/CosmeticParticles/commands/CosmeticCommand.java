@@ -41,7 +41,8 @@ public class CosmeticCommand {
                                 CosmeticType.HELIX.getName(),
                                 CosmeticType.TRIAD.getName(),
                                 CosmeticType.WAVE_SADDLE.getName(),
-                                CosmeticType.PULSATING_RING.getName()
+                                CosmeticType.PULSATING_RING.getName(),
+                                CosmeticType.DOUBLE_HELIX.getName()
                         )))
                 .executes((sender, args) -> {
                     if (sender instanceof Player) {
@@ -121,6 +122,8 @@ public class CosmeticCommand {
                 "<yellow>• /cosmetic montura</yellow> - <gray>Enable wave saddle particle effects with 3 rotating layers</gray>");
         MessageUtils.sendMessage(player,
                 "<yellow>• /cosmetic anillo</yellow> - <gray>Enable pulsating ring particle effects</gray>");
+        MessageUtils.sendMessage(player,
+                "<yellow>• /cosmetic doble_helix</yellow> - <gray>Enable swirling double helix effects</gray>");
         MessageUtils.sendMessage(player, "");
 
         if (particleManager.hasActiveCosmetic(player)) {
