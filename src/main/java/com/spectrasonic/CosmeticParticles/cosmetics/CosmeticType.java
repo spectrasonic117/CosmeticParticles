@@ -5,7 +5,8 @@ public enum CosmeticType {
     TRIAD("triada", "Efecto de triada ascendente"),
     WAVE_SADDLE("montura", "Montura ondulada de 3 capas rotatorias"),
     PULSATING_RING("anillo", "Anillo pulsante brillante"),
-    DOUBLE_HELIX("doble_helix", "Efecto de resorte doble giratorio");
+    DOUBLE_HELIX("doble_helix", "Efecto de resorte doble giratorio"),
+    STAR_FLASH("destello_estelar", "Destellos de varas del fin saliendo del jugador");
 
     private final String name;
     private final String description;

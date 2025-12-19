@@ -8,6 +8,7 @@ import com.spectrasonic.CosmeticParticles.cosmetics.TriadCosmetic;
 import com.spectrasonic.CosmeticParticles.cosmetics.WaveSaddleCosmetic;
 import com.spectrasonic.CosmeticParticles.cosmetics.PulsatingRingCosmetic;
 import com.spectrasonic.CosmeticParticles.cosmetics.DoubleHelixCosmetic;
+import com.spectrasonic.CosmeticParticles.cosmetics.StarFlashCosmetic;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -77,6 +78,7 @@ public class ParticleManager {
             case WAVE_SADDLE -> new WaveSaddleCosmetic(player);
             case PULSATING_RING -> new PulsatingRingCosmetic(player);
             case DOUBLE_HELIX -> new DoubleHelixCosmetic(player);
+            case STAR_FLASH -> new StarFlashCosmetic(player);
         };
     }
 
